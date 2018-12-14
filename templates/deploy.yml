@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ws-server
+spec:
+  selector:
+    matchLabels:
+      app: ws-server
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: ws-server
+    spec:
+      containers:
+      - name: ws-server
+        image: roffe/ws-ping-pong:latest
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /healthz
+            port: 8000
+            scheme: HTTP
+          initialDelaySeconds: 3
+          periodSeconds: 3
+          successThreshold: 1
+          timeoutSeconds: 1
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: ws-server
+  name: ws-server
+spec:
+  ports:
+  - port: 80
+    name: http
+    targetPort: 8000
+  selector:
+    app: ws-server
+---
