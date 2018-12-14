@@ -2,8 +2,16 @@
 
 ## Deploy server
 
-    kubectl apply -f https://github.com/roffe/krtest/blob/master/templates/deploy.yml
+    kubectl apply -f https://raw.githubusercontent.com/roffe/krtest/master/templates/deploy.yml
 
 ## Run test client
 
-    kubectl run --rm -ti ping-client --image roffe/ws-ping-pong:latest --command -- /go/bin/client -addr krtest.krtest.svc.cluster.local.
+    ./run.sh
+
+## monitor ipvs
+
+    ./monitor-ipvs
+
+## tail kube-router
+
+    ./log.sh
