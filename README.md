@@ -6,4 +6,4 @@
 
 ## Run test client
 
-    kubectl run --rm -ti krtest-client --image roffe/krtest:latest --command -- /go/bin/client -addr krtest.krtest.svc.cluster.local.
+    kubectl run --rm -ti ping-client --image roffe/ws-ping-pong:latest --command -- /go/bin/client -addr krtest.krtest.svc.cluster.local.
